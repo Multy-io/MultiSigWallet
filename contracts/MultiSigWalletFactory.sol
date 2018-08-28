@@ -32,8 +32,10 @@ contract MultiSigWalletFactory is Factory {
     /// @return Returns wallet address.
     function create(address[] _owners, uint _required)
         public
+        payable
         returns (address wallet)
     {
+        require(msg.value >= _price);
         wallet = new MultiSigWallet(_owners, _required);
         register(wallet);
         sendMoney();
