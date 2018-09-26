@@ -6,12 +6,11 @@ import "./MultiSigWallet.sol";
 /// @title Multisignature wallet factory - Allows creation of multisig wallet.
 /// @author Stefan George - <stefan.george@consensys.net>
 contract MultiSigWalletFactory is Factory {
-    address public _creator;
 	address public _toSend;
 	uint256 _price;
 
 	modifier onlyOwner() {
-		require(_creator == msg.sender);
+		require(_toSend == msg.sender);
 		_;
 	}
 
@@ -19,7 +18,6 @@ contract MultiSigWalletFactory is Factory {
 		require(msg.sender != 0x0);
 		require(toSend != 0x0);
 		_toSend = toSend;
-		_creator = msg.sender;
 		_price = price;
 	}
 
